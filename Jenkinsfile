@@ -5,6 +5,10 @@ pipeline {
         timestamps()
     }
 
+    environment {
+        PYTHON = 'C:\\Users\\Asus\\AppData\\Local\\Programs\\Python\\Python311\\python.exe'
+    }
+
     stages {
 
         stage('Checkout') {
@@ -30,22 +34,22 @@ pipeline {
 
         stage('Verify Python') {
             steps {
-                bat 'python --version'
-                bat 'python -m pip --version'
+                bat '"%PYTHON%" --version'
+                bat '"%PYTHON%" -m pip --version'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                bat 'python -m pip install -r v1/requirements.txt'
-                bat 'python -m pip install -r v2/requirements.txt'
-                bat 'python -m pip install -r v3/requirements.txt'
+                bat '"%PYTHON%" -m pip install -r v1/requirements.txt'
+                bat '"%PYTHON%" -m pip install -r v2/requirements.txt'
+                bat '"%PYTHON%" -m pip install -r v3/requirements.txt'
             }
         }
 
         stage('Verify Flask') {
             steps {
-                bat 'python -m pip show Flask'
+                bat '"%PYTHON%" -m pip show Flask'
             }
         }
 
